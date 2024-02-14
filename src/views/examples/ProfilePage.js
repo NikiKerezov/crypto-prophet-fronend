@@ -1,5 +1,4 @@
 import React from "react";
-import StripeCardForm from "components/stripe/StripeCard.js";
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 // reactstrap components
@@ -21,6 +20,7 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 import StripeContainer from "components/stripe/StripeContainer";
+import BuyButtonComponent from "components/stripe/StripeButton";
 
 function ProfilePage() {
   const [pills, setPills] = React.useState("2");
@@ -46,11 +46,7 @@ function ProfilePage() {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
-                {showItem ? <StripeContainer /> : <> <h3> $10.00 </h3> 
-                  <Button onClick={() => setShowItem(true)}>
-                   Purchase Subscription 
-                  </Button>
-                 </>}
+                <BuyButtonComponent> </BuyButtonComponent>
               </Col>
             </Row>
           </Container>

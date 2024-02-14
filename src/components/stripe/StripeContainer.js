@@ -3,16 +3,19 @@ import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import StripeCardForm from './StripeCard';
 import { Container } from 'reactstrap';
-const PUBLIC_KEY = "pk_test_51Oh8D3GtZ4KJVRzk02rYvpf1v5fmZl90Iq6nqiV7Q6Y9YL0L1u2Xq2gQVu72RxtHa8bnv7Kpc0S4lS5Mq7umgF9x00SNcm3Ivy"
+import { useState, useEffect } from 'react';
+import BuyButtonComponent from './StripeButton'
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout
+} from '@stripe/react-stripe-js';
 
-const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
-export default function StripeContainer() {
-    return (
-        <Container>
-      <Elements stripe={stripeTestPromise}>
-        <StripeCardForm />
-      </Elements>
-    </Container>
-    );
+const StripeContainer = () => {
+  return <>
+    <BuyButtonComponent>
+    </BuyButtonComponent>
+  </>
 }
+
+export default StripeContainer;
