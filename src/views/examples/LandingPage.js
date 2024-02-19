@@ -43,10 +43,7 @@ function LandingPage() {
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h2 className="title">What is Crypto prophet?</h2>
                 <h5 className="description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
-                  quibusdam, ipsa, quidem, voluptatem voluptatum iusto
-                  voluptates doloremque magni quas voluptatibus fugit
-                  exercitationem? Quisquam, voluptates.
+                  Crypto Prophet is a telegram bot that provides you with the latest news and updates on the cryptocurrency market. That makes trading crypto easy for you! No more fake news and hours of reading multiple websites! Get all the information you need in one place!
                 </h5>
               </Col>
             </Row>
@@ -75,37 +72,21 @@ function LandingPage() {
                   ></img>
                 </div>
                   <h3>
-                    So what does the new record for the lowest level of winter
-                    ice actually mean
+                    So why should you invest in crypto?
                   </h3>
                   <p>
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens with climate change. Even if the
-                    Arctic continues to be one of the fastest-warming regions of
-                    the world, it will always be plunged into bitterly cold
-                    polar dark every winter. And year-by-year, for all kinds of
-                    natural reasons, there’s huge variety of the state of the
-                    ice.
+                    Cryptocurrencies are digital or virtual currencies that use cryptography for security and are typically decentralized. 
+                    They are secured by cryptography, which makes it nearly impossible to counterfeit or double-spend. 
+                    Many cryptocurrencies are built on blockchain technology, a distributed ledger enforced by a disparate network of computers. 
+                    A defining feature of cryptocurrencies is that they are generally not issued by any central authority, rendering them theoretically immune to government interference or manipulation. 
                   </p>
                   <p>
-                    For a start, it does not automatically follow that a record
-                    amount of ice will melt this summer. More important for
-                    determining the size of the annual thaw is the state of the
-                    weather as the midnight sun approaches and temperatures
-                    rise. But over the more than 30 years of satellite records,
-                    scientists have observed a clear pattern of decline,
-                    decade-by-decade.
+                    Cryptocurrencies are systems that allow for secure payments online which are denominated in terms of virtual "tokens," which are represented by ledger entries internal to the system.
                   </p>
                   <p>
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens with climate change. Even if the
-                    Arctic continues to be one of the fastest-warming regions of
-                    the world, it will always be plunged into bitterly cold
-                    polar dark every winter. And year-by-year, for all kinds of
-                    natural reasons, there’s huge variety of the state of the
-                    ice.
+                    The first blockchain-based cryptocurrency was Bitcoin, which still remains the most popular and most valuable. 
+                    Today, there are thousands of alternate cryptocurrencies with various functions and specifications. 
+                    Some of these are clones of Bitcoin, while others are forks, or new cryptocurrencies that split off from an already existing one.
                   </p>
                 </Col>
               </Row>

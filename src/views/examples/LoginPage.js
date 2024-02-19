@@ -17,6 +17,7 @@ import {
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const requestLogin = async (event, navigate, setLoginError) => {
   event.preventDefault();
@@ -43,7 +44,8 @@ const requestLogin = async (event, navigate, setLoginError) => {
     if (response.ok) {
       // Successful login
       const { jwtToken } = await response.json();
-      console.log("Login successful. Token:", jwtToken);
+      Cookies.set('token', jwtToken, { secure: false });
+      Cookies.set('username', username, { secure: false });
 
       // Redirect to /profile-page with user's name as parameter
       navigate(`/profile-page?name=${username}`);

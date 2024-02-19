@@ -1,7 +1,6 @@
-import React from "react";
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-// reactstrap components
+import React, { useState, useEffect } from "react";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import {
   Button,
   NavItem,
@@ -15,17 +14,20 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
-// core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
-import StripeContainer from "components/stripe/StripeContainer";
+import StripeCancellationContainer from "components/stripe/StripeCancellationContainer";
 import BuyButtonComponent from "components/stripe/StripeButton";
+import TelegramLinkCard from "components/TelegramLinkCard";
+import Cookies from "js-cookie";
 
 function ProfilePage() {
-  const [pills, setPills] = React.useState("2");
-  const [showItem, setShowItem] = React.useState(false);
-  React.useEffect(() => {
+  const [pills, setPills] = useState("2");
+  const [showItem, setShowItem] = useState(false);
+  const isProfileEnabled = Cookies.get("isProfileEnabled");
+
+  useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -37,19 +39,33 @@ function ProfilePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowItem(true); 
+    }, 5000);
+
+    return () => clearTimeout(timeoutId); // Cleanup
+  }, []);
+
   return (
     <>
       <ExamplesNavbar />
       <div className="wrapper">
         <ProfilePageHeader />
         <div className="section">
-          <Container>
-            <Row>
-              <Col className="ml-auto mr-auto" md="6">
-                <BuyButtonComponent> </BuyButtonComponent>
-              </Col>
-            </Row>
-          </Container>
+        <div>
+          {isProfileEnabled === "false" ? ( // Convert string to boolean for comparison
+            <Container style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              {showItem && <BuyButtonComponent />}
+            </Container>
+          ) : (
+            <Container style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <StripeCancellationContainer />
+            </Container>
+          )}
+          {console.log("isProfileEnabled: ", isProfileEnabled)}
+        </div>
+          <TelegramLinkCard />
         </div>
         <DefaultFooter />
       </div>

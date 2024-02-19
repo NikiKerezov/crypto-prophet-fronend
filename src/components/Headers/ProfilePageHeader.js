@@ -1,27 +1,49 @@
-import React from "react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container } from "reactstrap";
+import axios from "axios";
 
 function ProfilePageHeader() {
   const pageHeader = React.createRef();
   const location = useLocation();
-
-  React.useEffect(() => {
-    if (window.innerWidth > 991) {
-      const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
-      };
-      window.addEventListener("scroll", updateScroll);
-      return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
-      };
-    }
-  });
-
-  // Access user's name from URL parameters
+  const jwtToken = Cookies.get("token");
+  const [isProfileEnabled, setIsProfileEnabled] = useState(false);
   const userName = new URLSearchParams(location.search).get("name");
+  Cookies.set("username", userName);
+
+  console.log(userName);
+
+  useEffect(() => {
+    const fetchIsProfileEnabled = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:8080/userHandler/v2/user/isProfileEnabled',
+           userName,
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          setIsProfileEnabled(response.data); // Assuming response.data directly holds the boolean value
+          Cookies.set("isProfileEnabled", response.data);
+          console.log("isProfileEnabled: ", response.data);
+        } else {
+          throw new Error(`API error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Error fetching profile status:", error);
+      }
+    };
+
+    fetchIsProfileEnabled();
+  }, [userName, jwtToken, isProfileEnabled]);
+
+
+  console.log(isProfileEnabled);
+
 
   return (
     <>
@@ -54,7 +76,8 @@ function ProfilePageHeader() {
           {/* User Information */}
           <div className="user-info">
             <h3 className="title">{userName}</h3>
-            <p className="category">Photographer</p>
+            <p className="category">{isProfileEnabled ? "Profile is enabled" : "Profile is disabled"}</p>
+
           </div>
         </Container>
       </div>
