@@ -26,6 +26,18 @@ function SignUp() {
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [userNameFocus, setUserNameFocus] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const validateEmail = (email) => {
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const requestSignUp = async (event) => {
     event.preventDefault();
@@ -35,6 +47,18 @@ function SignUp() {
     const userName = event.target[2].value;
     const email = event.target[3].value;
     const password = event.target[4].value;
+
+    // Check password strength
+    if (!validatePassword(password)) {
+      setErrorMessage("Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one number.");
+      return;
+    }
+
+    // Check email validity
+    if (!validateEmail(email)) {
+      setErrorMessage("Invalid email address.");
+      return;
+    }
 
     const requestData = {
       firstName: firstName,
@@ -114,7 +138,7 @@ function SignUp() {
                           <i className="now-ui-icons ui-1_email-85"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Email..." type="text" onFocus={() => setEmailFocus(true)} onBlur={() => setEmailFocus(false)} />
+                      <Input placeholder="Email..." type="email" onFocus={() => setEmailFocus(true)} onBlur={() => setEmailFocus(false)} />
                     </InputGroup>
                     <InputGroup className={"no-border" + (passwordFocus ? " input-group-focus" : "")}>
                       <InputGroupAddon addonType="prepend">
@@ -124,6 +148,7 @@ function SignUp() {
                       </InputGroupAddon>
                       <Input placeholder="Password..." type="password" onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} />
                     </InputGroup>
+                    {errorMessage && <Alert color="danger">{errorMessage}</Alert>}
                     <div className="text-center">
                       <Button className="btn-default btn-round" color="secondary" size="lg" type="submit">Get Started</Button>
                     </div>
